@@ -1,5 +1,5 @@
 import unittest
-from sumOfTwo import findTarget
+from SumOfTwo import findTarget
 
 class TestFindTarget(unittest.TestCase):
     
@@ -27,7 +27,7 @@ class TestFindTarget(unittest.TestCase):
 
     def test_no_solution(self):
         result = findTarget([1, 2, 3], 10)
-        self.assertEqual(result, [0, 0])  
+        self.assertIsNone(result)  
 
 if __name__ == '__main__':
     unittest.main()
