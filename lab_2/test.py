@@ -1,61 +1,33 @@
 import unittest
-from gen_bin_tree import gen_bin_tree  
+from SumOfTwo import findTarget
 
-class TestGenBinTree(unittest.TestCase):
+class TestFindTarget(unittest.TestCase):
     
-    def test_height_zero(self):
-        """Тест для высоты 0"""
-        result = gen_bin_tree(0, 9)
-        self.assertEqual(result, {})
+    def test_example1(self):
+        result = findTarget([2, 7, 11, 15], 9)
+        self.assertEqual(result, [0, 1])
     
-    def test_height_one(self):
-        """Тест для высоты 1 (только корень)"""
-        result = gen_bin_tree(1, 9)
-        expected = {
-            "root": 9,
-            "left": None,
-            "right": None
-        }
-        self.assertEqual(result, expected)
+    def test_example2(self):
+        result = findTarget([3, 2, 4], 6)
+        self.assertEqual(result, [1, 2])
     
-    def test_height_two(self):
-        """Тест для высоты 2"""
-        result = gen_bin_tree(2, 9)
-        expected = {
-            "root": 9,
-            "left": {
-                "root": 19,  # 9*2+1 = 19
-                "left": None,
-                "right": None
-            },
-            "right": {
-                "root": 17,  # 2*9-1 = 17
-                "left": None,
-                "right": None
-            }
-        }
-        self.assertEqual(result, expected)
-    
-    
-    def test_calculation_correctness(self):
-        """Тест на правильность вычислений"""
-        result = gen_bin_tree(2, 10)
-        
-        # Проверяем правильность вычислений для левых ветвей
-        self.assertEqual(result["left"]["root"], 21)  # 10*2+1 = 21
-        
-        # Проверяем правильность вычислений для правых ветвей
-        self.assertEqual(result["right"]["root"], 19)  # 2*10-1 = 19
-    
-    def test_leaf_nodes_none(self):
-        """Тест что листовые узлы равны None"""
-        result = gen_bin_tree(2, 9)
-        
-        # Узлы высоты 2 должны иметь листовые узлы как None
-        self.assertIsNone(result["left"]["left"])
-        self.assertIsNone(result["left"]["right"])
-        self.assertIsNone(result["right"]["left"])
-        self.assertIsNone(result["right"]["right"])
+    def test_example3(self):
+        result = findTarget([3, 3], 6)
+        self.assertEqual(result, [0, 1])
+
+    def test_negative_numbers(self):
+        """Тест с отрицательными числами в массиве"""
+        result = findTarget([-1, 2, 5, 8], 1)
+        self.assertEqual(result, [0, 1])
+
+    def test_larger_array(self):
+        """Тест с большим массивом и числами вразброс"""
+        result = findTarget([1, 4, 7, 10, 13, 16, 19], 23)
+        self.assertEqual(result, [1, 6])
+
+    def test_no_solution(self):
+        result = findTarget([1, 2, 3], 10)
+        self.assertIsNone(result)  
 
 if __name__ == '__main__':
     unittest.main()
