@@ -2,16 +2,17 @@ import logging
 import requests
 import sys
 
-logging.basicConfig(
-    level=logging.INFO,
-    filename="lab_6/logs.log",
-    filemode="w",
-    encoding="utf-8",
-    format="%(asctime)s [%(levelname)s] %(message)s",
-)
-
 
 def log(func):
+
+    logging.basicConfig(
+        level=logging.INFO,
+        filename="lab_6/logs.log",
+        filemode="a",
+        encoding="utf-8",
+        format="%(asctime)s [%(levelname)s] %(message)s",
+    )
+
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -21,7 +22,7 @@ def log(func):
             return None
 
         except KeyError:
-            logging.error("В ответе нет нужной валюты или нет данных о курсах")
+            logging.error("В ответе нет данных о курсах")
             return None
 
         except ValueError:
@@ -42,11 +43,11 @@ def get_currencies(
     data = response.json()
     result = {}
 
-    if currency_codes is None:
-        currency_codes = list(data["Valute"].keys())
-
     if "Valute" not in data:
         raise KeyError
+
+    if currency_codes is None:
+        currency_codes = list(data["Valute"].keys())
 
     for code in currency_codes:
         if code in data["Valute"]:
