@@ -1,0 +1,18 @@
+.currencies{
+    display: flex;
+}
+
+.currency{
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.currency-header,
+.currency-info{
+    display: flex;
+}
+
+.currency-name{
+
+}

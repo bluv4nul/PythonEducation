@@ -2,8 +2,12 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from models import *
 from jinja2 import Environment, PackageLoader, select_autoescape
 from urllib.parse import parse_qs
+from utils.currencies_api import get_currencies
 import os
 import mimetypes
+import json
+import logging
+
 
 HOST = "localhost"
 PORT = 8000
@@ -73,7 +77,17 @@ class myHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "text/html")
             self.end_headers()
 
-            html_content = template_currencies.render()
+            currencies = get_currencies()
+
+            if not currencies:
+                logging.error("get_currencies() вернул пустой список или не сработал")
+
+            currencies_data = [curr.__dict__ for curr in currencies]
+
+            html_content = template_currencies.render().replace(
+                "//CURRENCIES_DATA;",
+                f"const currenciesData = {json.dumps(currencies_data)};",
+            )
 
             self.wfile.write(bytes(html_content.encode("utf-8")))
 
@@ -91,6 +105,7 @@ server = HTTPServer((HOST, PORT), myHandler)
 
 try:
     print("Server now running ...")
+    print("adress http://localhost:8000")
     server.serve_forever()
 except KeyboardInterrupt:
     print("Received interrupt, stopping server...")
