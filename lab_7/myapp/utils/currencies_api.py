@@ -8,7 +8,7 @@ def log(func):
 
     logging.basicConfig(
         level=logging.INFO,
-        filename="myapp/logs.log",
+        filename="lab_7/myapp/logs.log",
         filemode="a",
         encoding="utf-8",
         format="%(asctime)s [%(levelname)s] %(message)s",
