@@ -1,5 +1,5 @@
 class user_currency:
-    def __init__(self, id, user_id, currency_id):
+    def __init__(self, id, user_id, currency_id: list):
         self.id = id
         self.user_id = user_id
         self.currency_id = currency_id

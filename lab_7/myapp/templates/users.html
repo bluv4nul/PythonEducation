@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Users</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href=../static/main.css">
+  <link rel="stylesheet" href="../static/index.css">
   <link rel="stylesheet" href="../static/header.css">
   <link rel="stylesheet" href="../static/index.css">
 </head>
@@ -24,6 +24,26 @@
     </div>
   </header>
   <main>
+    <section>
+      <h2>Создать пользователя</h2>
+      <form action="/create_user" method="post">
+        <label>Имя: <input name="name" required></label>
+        <button type="submit">Создать</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Существующие пользователи</h2>
+      {% if users and users|length > 0 %}
+        <ul>
+        {% for u in users %}
+          <li><a href="/user?id={{ u.id }}">{{ u.name }} (id: {{ u.id }})</a></li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p>Пользователей нет</p>
+      {% endif %}
+    </section>
   </main>
 </body>
 </html>

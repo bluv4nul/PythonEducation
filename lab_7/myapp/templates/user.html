@@ -24,6 +24,28 @@
     </div>
   </header>
   <main>
+    <section>
+      {% if user %}
+        <h2>Пользователь: {{ user.name }} (id: {{ user.id }})</h2>
+
+        <h3>Подписки на валюты</h3>
+        <form action="/subscribe" method="post">
+          <input type="hidden" name="user_id" value="{{ user.id }}">
+          <div>
+            {% for cur in currencies %}
+              <label>
+                <input type="checkbox" name="currency" value="{{ cur._char_code }}"
+                  {% if cur._char_code in subscribed_codes %}checked{% endif %}>
+                {{ cur._name }} ({{ cur._char_code }})
+              </label><br>
+            {% endfor %}
+          </div>
+          <button type="submit">Обновить подписки</button>
+        </form>
+      {% else %}
+        <p>Пользователь не найден. Вернитесь к <a href="/users">списку пользователей</a>.</p>
+      {% endif %}
+    </section>
   </main>
 </body>
 </html>
