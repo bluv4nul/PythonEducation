@@ -5,45 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Users</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../static/index.css">
-  <link rel="stylesheet" href="../static/header.css">
-  <link rel="stylesheet" href="../static/index.css">
 </head>
 
 <body>
   <header>
-    <nav class="left-section">
       <a href="/"><button>Главная</button></a>
       <a href="/users"><button>Пользователи</button></a>
       <a href="/currencies"><button>Курсы валют</button></a>
       <a href="/author"><button>Информация об авторе</button></a>
-    </nav>
-    <div class="right-section">
       <input class="" type="text" placeholder="Поиск пользователя по id">
-    </div>
   </header>
-  <main>
-    <section>
-      <h2>Создать пользователя</h2>
-      <form action="/create_user" method="post">
-        <label>Имя: <input name="name" required></label>
-        <button type="submit">Создать</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Существующие пользователи</h2>
-      {% if users and users|length > 0 %}
-        <ul>
-        {% for u in users %}
-          <li><a href="/user?id={{ u.id }}">{{ u.name }} (id: {{ u.id }})</a></li>
-        {% endfor %}
-        </ul>
-      {% else %}
-        <p>Пользователей нет</p>
-      {% endif %}
-    </section>
-  </main>
+  <h1 style="text-align: center;">Список пользователей</h1>
+  <table border="1" style="margin: 0 auto; text-align: center;">
+    <tr>
+      <td>id</td><td>Name</td><td>User page</td>
+    {% for user in users %}
+    <tr>
+      <td>{{user._id}}</td>
+      <td>{{user._name}}</td>
+      <td><a href="user?id={{user._id}}">link</a></td>
+    </tr>
+    {% endfor %}
+  </table>
 </body>
+
 </html>

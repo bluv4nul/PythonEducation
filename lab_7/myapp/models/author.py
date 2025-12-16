@@ -1,4 +1,4 @@
-class author:
+class Author:
     def __init__(self, name, group):
         self._name = name
         self._group = group

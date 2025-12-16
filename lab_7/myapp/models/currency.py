@@ -1,4 +1,4 @@
-class currency:
+class Currency:
     def __init__(self, id, num_code, char_code, name, value, nominal):
         self._id = id
         self._num_code = num_code

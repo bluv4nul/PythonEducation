@@ -1,4 +1,4 @@
-class app:
+class App:
     def __init__(self, name, version, author):
         self._name = name
         self._version = version

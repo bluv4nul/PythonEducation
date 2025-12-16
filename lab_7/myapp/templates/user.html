@@ -4,48 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href=../static/main.css">
-  <link rel="stylesheet" href="../static/header.css">
-  <link rel="stylesheet" href="../static/index.css">
+  <title>Users</title>
 </head>
 
 <body>
   <header>
-    <nav class="left-section">
       <a href="/"><button>Главная</button></a>
       <a href="/users"><button>Пользователи</button></a>
       <a href="/currencies"><button>Курсы валют</button></a>
       <a href="/author"><button>Информация об авторе</button></a>
-    </nav>
-    <div class="right-section">
       <input class="" type="text" placeholder="Поиск пользователя по id">
-    </div>
   </header>
-  <main>
-    <section>
-      {% if user %}
-        <h2>Пользователь: {{ user.name }} (id: {{ user.id }})</h2>
+  <h1 style="text-align: center;">Страница пользователя {{user._name}}</h1>
 
-        <h3>Подписки на валюты</h3>
-        <form action="/subscribe" method="post">
-          <input type="hidden" name="user_id" value="{{ user.id }}">
-          <div>
-            {% for cur in currencies %}
-              <label>
-                <input type="checkbox" name="currency" value="{{ cur._char_code }}"
-                  {% if cur._char_code in subscribed_codes %}checked{% endif %}>
-                {{ cur._name }} ({{ cur._char_code }})
-              </label><br>
-            {% endfor %}
-          </div>
-          <button type="submit">Обновить подписки</button>
-        </form>
-      {% else %}
-        <p>Пользователь не найден. Вернитесь к <a href="/users">списку пользователей</a>.</p>
-      {% endif %}
-    </section>
-  </main>
+  <h2>Подписки</h2>
+  <table border="1">
+    <tr>
+      <td>Char Code</td><td>Name</td><td>Value</td><td>Num Code</td>
+    </tr>
+    {% for cur in currencies %}
+    <tr>
+      <td>{{cur._char_code}}</td>
+      <td>{{cur._name}}</td>
+      <td>{{cur._value}}</td>
+      <td>{{cur._num_code}}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </body>
+
 </html>

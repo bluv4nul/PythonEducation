@@ -1,7 +1,7 @@
 import logging
 import requests
 import sys
-from models.currency import currency
+from models.currency import Currency
 
 
 def log(func):
@@ -53,7 +53,7 @@ def get_currencies(
     for code in currency_codes:
         if code in data["Valute"]:
             result.append(
-                currency(
+                Currency(
                     id=data["Valute"][code]["ID"],
                     num_code=data["Valute"][code]["NumCode"],
                     char_code=data["Valute"][code]["CharCode"],

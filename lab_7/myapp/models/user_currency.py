@@ -1,8 +1,11 @@
-class user_currency:
-    def __init__(self, id, user_id, currency_id: list):
-        self.id = id
-        self.user_id = user_id
-        self.currency_id = currency_id
+from models import user
+
+
+class UserCurrency:
+    def __init__(self, user: user.User, currency_id: list = None):
+        self._id = id(self)
+        self._user_id = user.id
+        self._currency_id = currency_id
 
     @property
     def id(self):
