@@ -4,7 +4,7 @@ from models import user
 class UserCurrency:
     def __init__(self, user: user.User, currency_id: list = None):
         self._id = id(self)
-        self._user_id = user.id
+        self._user_id = user._id
         self._currency_id = currency_id
 
     @property
