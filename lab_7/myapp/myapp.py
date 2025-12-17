@@ -34,6 +34,10 @@ UserCurrency = [
 currencies_data = get_currencies()
 
 
+def update_currencies():
+    currencies_data = get_currencies()
+
+
 class myHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -54,6 +58,8 @@ class myHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
+
+            update_currencies()
 
             html_content = template_currencies.render(currencies=currencies_data)
 
@@ -106,6 +112,15 @@ class myHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
+
+            self.wfile.write(bytes(html_content.encode("utf-8")))
+
+        elif path == "/author":
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+
+            html_content = template_author.render()
 
             self.wfile.write(bytes(html_content.encode("utf-8")))
 
