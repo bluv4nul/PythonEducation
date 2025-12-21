@@ -2,10 +2,10 @@ from models import user, user_currency
 from utils.currencies_api import get_currencies
 
 Users = [
-    user.User(1, "Petya"),
-    user.User(2, "Vanya"),
-    user.User(3, "Fedya"),
-    user.User(4, "Max"),
+    user.User("1", "Petya"),
+    user.User("2", "Vanya"),
+    user.User("3", "Fedya"),
+    user.User("4", "Max"),
 ]
 
 UserCurrency = [
@@ -30,12 +30,7 @@ def handle_user_profile(user_id):
     if user_id is None:
         return None, {"message": "User ID not provided."}, 400
 
-    try:
-        uid = int(user_id)
-    except ValueError:
-        return None, {"message": "Invalid User ID."}, 400
-
-    user_obj = next((u for u in Users if u._id == uid), None)
+    user_obj = next((u for u in Users if u._id == user_id), None)
     if user_obj is None:
         return None, {"message": "User not found."}, 404
 

@@ -1,8 +1,15 @@
-from models import user
+from models.user import User
 
 
 class UserCurrency:
-    def __init__(self, user: user.User, currency_id: list = None):
+    def __init__(self, user: User, currency_id: list = None):
+
+        if currency_id is None:
+            currency_id = []
+
+        if not isinstance(currency_id, list) or not isinstance(user, User):
+            raise TypeError()
+
         self._id = id(self)
         self._user_id = user._id
         self._currency_id = currency_id

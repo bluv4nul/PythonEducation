@@ -1,5 +1,12 @@
 class App:
-    def __init__(self, name, version, author):
+    def __init__(self, name: str, version: str, author: str):
+
+        if (
+            not isinstance(name, str)
+            or not isinstance(version, str)
+            or not isinstance(author, str)
+        ):
+            raise TypeError()
         self._name = name
         self._version = version
         self._author = author

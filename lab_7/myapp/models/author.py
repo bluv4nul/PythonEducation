@@ -1,5 +1,9 @@
 class Author:
-    def __init__(self, name, group):
+    def __init__(self, name: str, group: str):
+
+        if not isinstance(name, str) or not isinstance(group, str):
+            raise TypeError()
+
         self._name = name
         self._group = group
 

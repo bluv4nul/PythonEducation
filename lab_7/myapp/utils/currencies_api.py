@@ -64,4 +64,5 @@ def get_currencies(
             )
         else:
             logging.warning(f"В ответе нет данных о валюте с ключом: {code}")
+    logging.info("Данные о валютах успешно получены из API")
     return result

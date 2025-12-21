@@ -1,5 +1,24 @@
 class Currency:
-    def __init__(self, id, num_code, char_code, name, value, nominal):
+    def __init__(
+        self,
+        id: str,
+        num_code: str,
+        char_code: str,
+        name: str,
+        value: float,
+        nominal: int,
+    ):
+
+        if (
+            not isinstance(id, str)
+            or not isinstance(num_code, str)
+            or not isinstance(char_code, str)
+            or not isinstance(name, str)
+            or not isinstance(value, (int, float))
+            or not isinstance(nominal, int)
+        ):
+            raise TypeError()
+
         self._id = id
         self._num_code = num_code
         self._char_code = char_code
